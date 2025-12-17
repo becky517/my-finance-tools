@@ -1,90 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-H6T3JKZEPD"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-H6T3JKZEPD');
-</script>
-    
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-H6T3JKZEPD');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Compound Interest Calculator</title>
+    
+    <title>Free Compound Interest Calculator | Grow Your Wealth</title>
+    <meta name="description" content="Calculate your future wealth with our free compound interest calculator. Perfect for planning savings and investments.">
+
     <style>
-        body { font-family: sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; padding: 20px; }
-        .card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
-        h2 { color: #2d3436; text-align: center; }
+        :root { --primary: #00b894; --dark: #2d3436; --light: #f4f7f6; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--light); color: var(--dark); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        
+        .container { background: white; padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); width: 100%; max-width: 450px; }
+        h1 { font-size: 1.5rem; text-align: center; margin-bottom: 1.5rem; color: var(--primary); }
+        
         .input-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; color: #636e72; }
-        input { width: 100%; padding: 10px; border: 1px solid #dfe6e9; border-radius: 6px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background: #00b894; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; transition: 0.3s; }
-        button:hover { background: #00a884; }
-        #result { margin-top: 20px; padding: 15px; background: #f1f2f6; border-radius: 6px; text-align: center; display: none; }
-        .total-amount { font-size: 24px; font-weight: bold; color: #00b894; }
+        label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.9rem; }
+        input { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; font-size: 1rem; transition: border-color 0.3s; }
+        input:focus { border-color: var(--primary); outline: none; }
+        
+        button { width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 12px rgba(0,184,148,0.3); }
+        button:hover { transform: translateY(-1px); box-shadow: 0 6px 15px rgba(0,184,148,0.4); }
+
+        #result { margin-top: 25px; padding: 20px; background: #e8f8f5; border-radius: 10px; text-align: center; display: none; border: 1px solid var(--primary); }
+        .total-amount { font-size: 2rem; font-weight: 800; color: var(--primary); margin: 10px 0; }
+
+        /* Support Section */
+        .support-box { margin-top: 30px; text-align: center; font-size: 0.9rem; color: #636e72; }
+        .coffee-btn { display: inline-block; margin-top: 10px; padding: 10px 20px; background: #FFDD00; color: #000000; border-radius: 5px; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h2>Interest Calculator</h2>
-    
-    <div class="input-group">
-        <label>Initial Investment ($)</label>
-        <input type="number" id="principal" placeholder="e.g. 1000">
-    </div>
-
-    <div class="input-group">
-        <label>Monthly Contribution ($)</label>
-        <input type="number" id="monthly" placeholder="e.g. 100">
-    </div>
-
-    <div class="input-group">
-        <label>Annual Interest Rate (%)</label>
-        <input type="number" id="rate" placeholder="e.g. 7">
-    </div>
-
-    <div class="input-group">
-        <label>Years to Grow</label>
-        <input type="number" id="years" placeholder="e.g. 10">
-    </div>
-
-    <button onclick="calculate()">Calculate Wealth</button>
-
-    <div id="result">
-        <p>Estimated Total After <span id="displayYears">0</span> Years:</p>
-        <div class="total-amount" id="totalValue">$0.00</div>
-    </div>
-</div>
-
-<script>
-    function calculate() {
-        const P = parseFloat(document.getElementById('principal').value) || 0;
-        const PMT = parseFloat(document.getElementById('monthly').value) || 0;
-        const annualRate = parseFloat(document.getElementById('rate').value) / 100 || 0;
-        const t = parseFloat(document.getElementById('years').value) || 0;
-        const n = 12; // Compounded monthly
-
-        // Compound Interest Formula for Principal + Annuity
-        // A = P(1 + r/n)^(nt) + PMT * [((1 + r/n)^(nt) - 1) / (r/n)]
+    <div class="container">
+        <h1>Compound Interest Tool</h1>
         
-        const r_n = annualRate / n;
-        const nt = n * t;
+        <div class="input-group">
+            <label>Starting Balance ($)</label>
+            <input type="number" id="principal" placeholder="1000">
+        </div>
 
-        const principalCompounded = P * Math.pow((1 + r_n), nt);
-        const seriesCompounded = r_n === 0 ? PMT * nt : PMT * ((Math.pow((1 + r_n), nt) - 1) / r_n);
+        <div class="input-group">
+            <label>Monthly Contribution ($)</label>
+            <input type="number" id="monthly" placeholder="100">
+        </div>
 
-        const total = principalCompounded + seriesCompounded;
+        <div class="input-group">
+            <label>Annual Interest Rate (%)</label>
+            <input type="number" id="rate" placeholder="7">
+        </div>
 
-        document.getElementById('displayYears').innerText = t;
-        document.getElementById('totalValue').innerText = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(total);
-        document.getElementById('result').style.display = 'block';
-    }
-</script>
+        <div class="input-group">
+            <label>Years to Invest</label>
+            <input type="number" id="years" placeholder="10">
+        </div>
 
+        <button onclick="calculate()">Calculate My Wealth</button>
+
+        <div id="result">
+            <span>After <span id="displayYears">0</span> years, you'll have:</span>
+            <div class="total-amount" id="totalValue">$0.00</div>
+            <small>Assuming monthly compounding.</small>
+        </div>
+    </div>
+
+    <div class="support-box">
+        <p>Found this tool helpful?</p>
+        <a href="https://www.buymeacoffee.com/YOUR_USERNAME" target="_blank" class="coffee-btn">
+            ☕ Buy me a coffee
+        </a>
+    </div>
+
+    <script>
+        function calculate() {
+            const P = parseFloat(document.getElementById('principal').value) || 0;
+            const PMT = parseFloat(document.getElementById('monthly').value) || 0;
+            const r = (parseFloat(document.getElementById('rate').value) / 100) || 0;
+            const t = parseFloat(document.getElementById('years').value) || 0;
+            const n = 12; // Monthly compounding
+
+            if (t <= 0) return;
+
+            const r_n = r / n;
+            const nt = n * t;
+
+            // Formula: A = P(1 + r/n)^(nt) + PMT * [((1 + r/n)^(nt) - 1) / (r/n)]
+            const principalPart = P * Math.pow((1 + r_n), nt);
+            const contributionPart = r_n === 0 ? PMT * nt : PMT * ((Math.pow((1 + r_n), nt) - 1) / r_n);
+            
+            const total = principalPart + contributionPart;
+
+            document.getElementById('displayYears').innerText = t;
+            document.getElementById('totalValue').innerText = new Intl.NumberFormat('en-US', { 
+                style: 'currency', 
+                currency: 'USD' 
+            }).format(total);
+            
+            document.getElementById('result').style.display = 'block';
+
+            // Track the calculation event in Google Analytics
+            if(typeof gtag === 'function') {
+                gtag('event', 'calculate_wealth', { 'event_category': 'tool_usage', 'value': total });
+            }
+        }
+    </script>
 </body>
 </html>
